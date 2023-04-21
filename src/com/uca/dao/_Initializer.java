@@ -17,7 +17,7 @@ public class _Initializer {
             statement.executeUpdate();
 
 
-            statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users (id int primary key auto_increment, nom varchar(255), prenom varchar(255), email varchar(255), mdp varchar(255)); ");
+            statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS users (id int primary key auto_increment, nom varchar(255), prenom varchar(255), email varchar(255), pwd varchar(255)); ");
             statement.executeUpdate();
 
             statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS pokedex (idAPI int primary key, nom varchar(255)); ");
@@ -35,14 +35,14 @@ public class _Initializer {
 
 
             //Todo Remove me !
-            statement = connection.prepareStatement("INSERT INTO users(nom, prenom, email, mdp) VALUES(?, ?, ?, ?);");
+            statement = connection.prepareStatement("INSERT INTO users(nom, prenom, email, pwd) VALUES(?, ?, ?, ?);");
             statement.setString(1, "NomUserA");
             statement.setString(2, "PrenomUserA");
             statement.setString(3,"UserA@gmail.com");
             statement.setString(4,"TestPasswordUserA");
             statement.executeUpdate();
 
-            statement = connection.prepareStatement("INSERT INTO users(nom, prenom, email, mdp) VALUES(?, ?, ?, ?);");
+            statement = connection.prepareStatement("INSERT INTO users(nom, prenom, email, pwd) VALUES(?, ?, ?, ?);");
             statement.setString(1, "NomUserB");
             statement.setString(2, "PrenomUserB");
             statement.setString(3,"UserB@gmail.com");

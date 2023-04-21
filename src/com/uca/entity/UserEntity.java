@@ -5,7 +5,7 @@ public class UserEntity {
     private String prenom;
     private int id;
     private String email;
-    private String mdp;
+    private String pwd;
 
     public UserEntity() {
         //Ignored !
@@ -39,9 +39,9 @@ public class UserEntity {
 
     public void setEmail(String email) { this.email = email; }
 
-    public String getMotDePasse() { return mdp; }
+    public String getPwd() { return pwd; }
 
-    public void setMotDePasse(String mdp) { this.mdp = mdp; }
+    public void setPwd(String pwd) { this.pwd = pwd; }
 
 }
 

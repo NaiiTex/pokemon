@@ -4,7 +4,7 @@
 
 <ul>
     <#list users as user>
-        <li>${user.id} - ${user.nom} ${user.prenom} - ${user.email} </li>
+        <li>${user.id} - ${user.nom} ${user.prenom} - ${user.email} ${user.pwd} </li>
     </#list>
 </ul>
 

@@ -18,7 +18,8 @@ public class UserDAO extends _Generic<UserEntity> {
                 entity.setNom(resultSet.getString("nom"));
                 entity.setPrenom(resultSet.getString("prenom"));
                 entity.setEmail(resultSet.getString("email"));
-                entity.setMotDePasse(resultSet.getString("mdp"));
+                entity.setPwd(resultSet.getString("pwd"));
+
 
                 entities.add(entity);
             }

@@ -1,7 +1,9 @@
 package com.uca;
 
 import com.uca.dao._Initializer;
+import com.uca.entity.*;
 import com.uca.gui.*;
+import com.uca.core.*;
 
 import static spark.Spark.*;
 
@@ -19,14 +21,25 @@ public class StartServer {
         get("/users", (req, res) -> {
             return UserGUI.getAllUsers();
         });
-       /* get("/login",(req, res) -> {
-            Username = req.username;
-            Password = req.password;
-            return Controllers.CheckLogin(Username;Password);
+
+        get("/login", (req, res) -> {
+            String username = req.queryParams("username");
+            String password = req.queryParams("password");
+            UserEntity user = UserCore.getUserByUsernameAndPassword(username, password);
+            if (user != null) {
+                // valid username and password
+                res.redirect("/users");
+            } else {
+                // invalid username and/or password
+                res.redirect("/login?error=1");
+            }
+
+            return LoginGUI.getLoginPage();
         });
 
-        checklogin(String Username, String Password){
-*/
+
+
+
 
 
         }
