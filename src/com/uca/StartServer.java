@@ -1,9 +1,17 @@
 package com.uca;
 
+import com.uca.dao._Connector;
 import com.uca.dao._Initializer;
-import com.uca.entity.*;
 import com.uca.gui.*;
-import com.uca.core.*;
+import spark.ModelAndView;
+import spark.Spark;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -16,34 +24,61 @@ public class StartServer {
 
 
         _Initializer.Init();
-
+        String jdbcUrl = "jdbc:h2:~/test";
+        Connection connection = _Connector.getInstance();
         //Defining our routes
         get("/users", (req, res) -> {
             return UserGUI.getAllUsers();
         });
-
-        get("/login", (req, res) -> {
-            String username = req.queryParams("username");
-            String password = req.queryParams("password");
-            UserEntity user = UserCore.getUserByUsernameAndPassword(username, password);
-            if (user != null) {
-                // valid username and password
-                res.redirect("/users");
-            } else {
-                // invalid username and/or password
-                res.redirect("/login?error=1");
-            }
-
-            return LoginGUI.getLoginPage();
+        get("/register", (req, res) -> {
+            return UserGUI.Create();
         });
 
 
 
 
+        // Login page
+        get("/login", (request, response) -> {
+            return "<html><body>" +
+                    "<h2>Login</h2>" +
+                    "<form action='/login' method='post'>" +
+                    "Email: <input type='text' name='email'><br>" +
+                    "Password: <input type='password' name='password'><br>" +
+                    "<input type='submit' value='Login'>" +
+                    "</form>" +
+                    "</body></html>";
+        });
+
+// Login handler
+        post("/login", (request, response) -> {
+            String email = request.queryParams("email");
+            String password = request.queryParams("password");
+
+            // Check if the email and password match a record in the database
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM users WHERE email = '" + email + "' AND mdp = '" + password + "'");
+            if (result.next()) {
+                // Set a session attribute to store the user's ID
+                request.session().attribute("userId", result.getInt("id"));
+                response.redirect("/home");
+            } else {
+                return "Invalid email or password";
+            }
+
+            return null;
+        });
 
 
-        }
+// Registration page
+        //       get("/register", (request, response) -> {
+        //         return "<html><body>" +
+        //           "<h2>Registration</h2>" + "<form action='/register' method='post'>" +
+        //           "Nom: <input type='text' name='nom'><br>" +
+        //            "Prenom: <input type='text' name='prenom'><br>" +
+        //           "Email: <input type='text' name='email'><br>" +
+        //             "Password: <input type='password' name='password'><br>" +
+        //             "<input type='submit' value='Register'>" +
+        //            "</form>" +
+        //            "</body></html>";
+        //  });
 
-
-
-}
+    } }

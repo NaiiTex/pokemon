@@ -5,6 +5,8 @@ import com.uca.entity.UserEntity;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static spark.Spark.post;
+
 public class UserDAO extends _Generic<UserEntity> {
 
     public ArrayList<UserEntity> getAllUsers() {
@@ -18,8 +20,7 @@ public class UserDAO extends _Generic<UserEntity> {
                 entity.setNom(resultSet.getString("nom"));
                 entity.setPrenom(resultSet.getString("prenom"));
                 entity.setEmail(resultSet.getString("email"));
-                entity.setPwd(resultSet.getString("pwd"));
-
+                entity.setMotDePasse(resultSet.getString("mdp"));
 
                 entities.add(entity);
             }
@@ -32,8 +33,38 @@ public class UserDAO extends _Generic<UserEntity> {
 
     @Override
     public UserEntity create(UserEntity obj) {
-        //TODO !
-        return null;
+        post("/register", (request, response) -> {
+
+            String nom = request.queryParams("nom");
+            String prenom = request.queryParams("prenom");
+            String email = request.queryParams("email");
+            String password = request.queryParams("password");
+
+
+            // Check if the email is already taken
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
+            if (result.next()) {
+                return "Email already taken";
+            }
+
+            // Insert the new user into the database
+            PreparedStatement statement = this.connect.prepareStatement("INSERT INTO users(nom, prenom, email, mdp) VALUES(?, ?, ?, ?);");
+            statement.setString(1, nom);
+            statement.setString(2, prenom);
+            statement.setString(3, email);
+            statement.setString(4, password);
+            statement.executeUpdate();
+
+
+
+
+
+            response.redirect("/login");
+            return null;
+        });
+
+
+        return  obj;
     }
 
     @Override
