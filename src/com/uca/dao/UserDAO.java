@@ -30,8 +30,28 @@ public class UserDAO extends _Generic<UserEntity> {
 
         return entities;
     }
-
     @Override
+    public String CheckLogin(){
+        post("/login", (request, response) -> {
+            String email = request.queryParams("email");
+            String password = request.queryParams("password");
+
+            // Check if the email and password match a record in the database
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM users WHERE email = '" + email + "' AND mdp = '" + password + "'");
+            if (result.next()) {
+                // Set a session attribute to store the user's ID
+                request.session().attribute("userId", result.getInt("id"));
+                response.redirect("/home");
+            } else {
+                return "Invalid email or password";
+            }
+
+           return "logged";
+        });
+        return null;
+    }
+
+
     public UserEntity create(UserEntity obj) {
         post("/register", (request, response) -> {
 

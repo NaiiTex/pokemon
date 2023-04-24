@@ -1,9 +1,10 @@
 
 <#ftl encoding="utf-8">
-
-
-
-    <h1>User Registration</h1>
+<head>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <h1>Inscription</h1>
     <form action="/register" method="POST">
         <label for="nom">Nom:</label>
         <input type="text" id="nom" name="nom" required>

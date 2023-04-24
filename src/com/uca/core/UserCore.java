@@ -13,4 +13,6 @@ public class UserCore {
     public static UserEntity Create(UserEntity obj) {
         return new UserDAO().create(obj );
     }
+
+    public static String Login() { return new UserDAO().CheckLogin(); }
 }

@@ -1,19 +1,23 @@
 <#ftl encoding="utf-8">
 
-<body xmlns="http://www.w3.org/1999/html">
 
-    <form action="/login" method="GET">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Submit">
-    </form>
+<head>
+	<title>Connexion</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Connexion</h1>
+		<form class="login" method="post" action="/login">
+			<label for="username">E-mail</label>
+			<input type="text" id="email" name="email" placeholder="Enter e-mail">
 
-    <#if params.error?exists && params.error == "1">
-        <p style="color: red;">Invalid username and/or password.</p>
-    </#if>
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" placeholder="Enter password">
 
+			<button type="submit">Login</button>
+		</form>
+	</div>
 </body>
 
-</html>
+

@@ -1,0 +1,79 @@
+body {
+  background: url('background.png') no-repeat;
+  background-size: cover;
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  border: none;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.form button[type="submit"] {
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.form p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form p a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.form p a:hover {
+  text-decoration: underline;
+}
+
+.form .error-message {
+  color: #ff0000;
+  margin-bottom: 20px;
+}

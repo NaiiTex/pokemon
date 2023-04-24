@@ -12,11 +12,12 @@ public abstract class _Generic<T> {
      * @param obj
      */
     public abstract T create(T obj);
-
     /**
      * Permet la suppression d'une entrée de la base
      * @param obj
      */
     public abstract void delete(T obj);
+
+    public abstract String CheckLogin();
 
 }
